@@ -29,6 +29,8 @@
         <sql.connector.version>5.1.31</sql.connector.version>
         <hibernate.version>4.3.6.Final</hibernate.version>
         <testng.version>6.8.7</testng.version>
+        <sitemesh.version>2.4.2</sitemesh.version>
+        <jstl.version>1.2</jstl.version>
     </properties>
     <dependencies>
         <dependency>
@@ -57,5 +59,16 @@
             <artifactId>testng</artifactId>
             <version>7.1.0</version>
         </dependency>
+        <dependency>
+            <groupId>opensymphony</groupId>
+            <artifactId>sitemesh</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+
     </dependencies>
 </project>
