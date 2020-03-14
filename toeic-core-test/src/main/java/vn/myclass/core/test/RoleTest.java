@@ -46,7 +46,7 @@ public class RoleTest {
         String sortDirection=null;
         String sortExpression=null;
         String value=null;
-        Object[] objects=roleDao.findByProperty(null,null,null,null);
+        //Object[] objects=roleDao.findByProperty(null,null,null,null,null,null);
     }
     @Test
     public void checkDelete(){
