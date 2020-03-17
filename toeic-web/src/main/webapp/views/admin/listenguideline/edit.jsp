@@ -84,10 +84,13 @@
                             <input type="hidden" name="pojo.listenGuidelineId" value="${item.pojo.listenGuidelineId}"/>
                         </c:if>&ndash;%&gt;
                     </form>--%>
+                    <h1>Anh Đức</h1>
+                    <p>Chị Mai</p>
+                    <p class="textHide">Bé Vy</p>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right"><fmt:message key="label.guideline.title" bundle="${lang}"/></label>
+                        <label class="col-sm-3 control-label no-padding-right"></label>
                         <div class="col-sm-9">
-                            <button>Click me hide paragraphs</button>
+                            <button id="btnHide">Click me hide paragraphs</button>
                         </div>
                     </div>
                 </div>
@@ -97,10 +100,12 @@
 </div>
 <script>
     $(document).ready(function () {
-        HideAllWhenClickButton
+        HideAllWhenClickButton();
     });
     function HideAllWhenClickButton() {
-$
+$('#btnHide').click(function () {
+$(".textHide").hide();
+})
     }
 </script>
 </body>
