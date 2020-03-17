@@ -1,7 +1,9 @@
 <%@include file="/common/taglib.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <c:url value="/admin-guideline-listen-list.html" var="requestUrl"/>
-<html>
+<html><c:url value="/admin-guideline-listen-edit.html" var="listenGuidelineEdit">
+    <c:param name="urlType" value="url_edit"/>
+</c:url>
 <head>
     <title><fmt:message key="label.guideline.listen.list" bundle="${lang}"/></title>
 </head>
@@ -27,6 +29,16 @@
         <div class="page-content">
             <div class="row">
                 <div class="col-xs-12">
+
+                    <a href="${listenGuidelineEdit}">Thêm bài nghe</a>
+                    <c:if test="${not empty messageResponse}">
+                        <div class="alert-block alert-${alert}">
+                            <button type="button" class="close" data-dismiss="alert">
+                                <i class="ace-icon"></i>
+                            </button>
+                                ${messageResponse}
+                        </div>
+                    </c:if>
                    <div class="table-responsive">
                        <fmt:bundle basename="ApplicationResources">
                            <display:table id="tableList" name="items.listResult" partialList="true" size="${items.totalItems}"

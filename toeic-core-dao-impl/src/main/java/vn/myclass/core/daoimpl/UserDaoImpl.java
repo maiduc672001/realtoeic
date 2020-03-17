@@ -15,7 +15,7 @@ public class UserDaoImpl extends AbstractDao<Integer, UserEntity> implements Use
         Session session = HibernateUtils.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         try {
-            StringBuilder sql = new StringBuilder("FROM UserEntity WHERE name=: name AND password=: password");
+            StringBuilder sql = new StringBuilder("FROM UserEntity WHERE name= :name AND password= :password");
             Query query = session.createQuery(sql.toString());
             query.setParameter("name", name);
             query.setParameter("password", password);
