@@ -37,7 +37,7 @@
                                 ${messageResponse}
                         </div>
                     </c:if>
-                    <form action="${formUrl}" method="post" enctype="multipart/form-data" id="formEdit">
+                    <%--<form action="${formUrl}" method="post" enctype="multipart/form-data" id="formEdit">
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right"><fmt:message key="label.guideline.title" bundle="${lang}"/></label>
                             <div class="col-sm-9">
@@ -80,14 +80,33 @@
                                 <input type="submit" class="btn btn-white btn-warning btn-bold" value="<fmt:message key="label.done" bundle="${lang}"/>"/>
                             </div>
                         </div>
-                        <%--<c:if test="${not empty item.pojo.listenGuidelineId}">
+                        &lt;%&ndash;<c:if test="${not empty item.pojo.listenGuidelineId}">
                             <input type="hidden" name="pojo.listenGuidelineId" value="${item.pojo.listenGuidelineId}"/>
-                        </c:if>--%>
-                    </form>
+                        </c:if>&ndash;%&gt;
+                    </form>--%>
+                    <h1>Anh Đức</h1>
+                    <p>Chị Mai</p>
+                    <p class="textHide">Bé Vy</p>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right"></label>
+                        <div class="col-sm-9">
+                            <button id="btnHide">Click me hide paragraphs</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        HideAllWhenClickButton();
+    });
+    function HideAllWhenClickButton() {
+        $('#btnHide').click(function () {
+            $(".textHide").hide();
+        })
+    }
+</script>
 </body>
 </html>
