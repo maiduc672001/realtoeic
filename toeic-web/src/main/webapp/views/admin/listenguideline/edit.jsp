@@ -84,13 +84,22 @@
                             <input type="hidden" name="pojo.listenGuidelineId" value="${item.pojo.listenGuidelineId}"/>
                         </c:if>&ndash;%&gt;
                     </form>--%>
-                    <h1>Anh Đức</h1>
-                    <p>Chị Mai</p>
-                    <p class="textHide">Bé Vy</p>
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right"></label>
                         <div class="col-sm-9">
-                            <button id="btnHide">Click me hide paragraphs</button>
+                            <input type="text" id="dauvao" value="Anh Đức đẹp trai vãi đái"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right"></label>
+                        <div class="col-sm-9">
+                            <p id="daura">Nothing in this</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right"></label>
+                        <div class="col-sm-9">
+                            <button id="btnShow" onclick="ShowValue()">Show Value</button>
                         </div>
                     </div>
                 </div>
@@ -103,9 +112,13 @@
         HideAllWhenClickButton();
     });
     function HideAllWhenClickButton() {
-        $('#btnHide').click(function () {
+        $('#btnShow').click(function () {
             $(".textHide").hide();
         })
+    }
+    function ShowValue() {
+        var value=$('#dauvao').val();
+        $('#daura').html(value);
     }
 </script>
 </body>
