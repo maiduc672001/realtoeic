@@ -1,5 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/common/taglib.jsp" %>
+<c:url var="editUserUrl" value="/ajax-admin-user-edit.html">
+    <c:param name="urlType" value="url_edit"></c:param>
+</c:url>
+<c:url var="listUserUrl" value="/admin-user-list.html">
+    <c:param name="urlType" value="url_list"></c:param>
+</c:url>
 <html>
 <head>
     <title><fmt:message key="label.user.management" bundle="${lang}"/></title>
@@ -26,15 +32,6 @@
         <div class="page-content">
             <div class="row">
                 <div class="col-xs-12">
-
-                    <c:if test="${not empty messageResponse}">
-                        <div class="alert-block alert-${alert}">
-                            <button type="button" class="close" data-dismiss="alert">
-                                <i class="ace-icon"></i>
-                            </button>
-                                ${messageResponse}
-                        </div>
-                    </c:if>
                     <div class="row">
                         <div class="col-xs-12">
                             <c:if test="${not empty messageResponse}">
@@ -52,7 +49,7 @@
                                             <div class="pull-right tableTools-container">
                                                 <div class="dt-buttons btn-overlap btn-group">
                                                     <a flag="info"
-                                                       class="dt-button buttons-colvis btn btn-white btn-primary btn-bold"/>
+                                                       class="dt-button buttons-colvis btn btn-white btn-primary btn-bold" onclick="update(this)"/>
                                                 <span>
                                                     <i class="fa fa-plus-circle bigger-110 purple"></i>
                                                 </span>
@@ -97,9 +94,19 @@
                                                             sortName="name"/>
                                             <display:column property="fullName" titleKey="label.user.fullname"
                                                             sortable="true" sortName="fullName"/>
+                                            <display:column headerClass="col-actions" titleKey="label.action">
+                                                <c:url value="/ajax-admin-user-edit.html" var="editUrl">
+                                                    <c:param name="pojo.userId" value="${tableList.userId}"></c:param>
+                                                    <c:param name="urlType" value="url_edit"></c:param>
+                                                </c:url>
+                                                <a class="btn btn-sm btn-primary btn-edit" sc-url="${editUrl}" onclick="update(this)" data-toggle="tooltip" title="<fmt:message key='label.user.edit' bundle='${lang}'/>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                <a class="btn btn-sm btn-danger btn-cancel" data-toggle="tooltip" title="<fmt:message key='label.user.delete' bundle='${lang}'/>"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                            </display:column>
                                         </display:table>
                                     </fmt:bundle>
                                 </div>
+                                <input type="hidden" name="crudaction" id="crudaction"/>
+                                <input type="hidden" name="urlType" id="urlType"/>
                             </form>
                         </div>
                     </div>
@@ -108,5 +115,62 @@
         </div>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+
+</div>
+<script>
+    $(document).ready(function () {
+
+    });
+
+    function update(btn) {
+
+        var url=$(btn).attr('sc-url');
+        if(typeof url=='undefined'){
+            url='${editUserUrl}';
+        }
+        $('#myModal').load(url, '', function () {
+            $('#myModal').modal('toggle');
+            addOrEditUser();
+        });
+    }
+    function addOrEditUser() {
+$('#btnSave').click(function () {
+
+$('#editUserForm').submit();
+
+});
+        $('#editUserForm').submit(function (e) {
+            e.preventDefault();
+            $('#crudactionEdit').val('insert_update');
+            $.ajax({
+                type:'POST',
+                url:$(this).attr('action'),
+                data:$(this).serialize(),
+                dataType:'html',
+                success:function(abc){
+                    if(abc.trim()=='redirect_insert'){
+                        $('#crudaction').val('redirect_insert');
+                        $('#urlType').val('url_list');
+                        $('#formUrl').submit();
+                    }else if(abc.trim()=='redirect_update'){
+                        $('#crudaction').val('redirect_update');
+                        $('#urlType').val('url_list');
+                        $('#formUrl').submit();
+                    }else if(abc.trim()=='redirect_error'){
+                        $('#crudaction').val('redirect_error');
+                        $('#urlType').val('url_list');
+                        $('#formUrl').submit();
+                    }
+                },
+                error:function (res) {
+                    console.log(res);
+                }
+            })
+        });
+    }
+
+</script>
 </body>
 </html>
